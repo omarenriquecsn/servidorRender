@@ -1,5 +1,10 @@
 [build]
-  command = "npm install"
+command = "npm install & npm run build"
+functions = "functions"
 [functions] 
 directory = "express"
   
+[dev]
+command = "npm start"
+targetPort = 3000
+autoLauch = true
