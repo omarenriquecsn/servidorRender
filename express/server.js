@@ -305,8 +305,8 @@ app.use("/Globalca", async (req, res) => {
       },
     };
     const opts = { new: true };
-    console.log(req.body);
     const objectUpdate = await Globalca.findOneAndUpdate(filter, update, opts);
+    res.json(req.body)
   } else {
     const productos = await importGlobalca();
     res.json(productos);
@@ -331,6 +331,8 @@ app.use("/WMS", async (req, res) => {
     };
     const opts = { new: true };
     const objectUpdate = await WMS.findOneAndUpdate(filter, update, opts);
+    res.json(req.body)
+
   } else {
     const productos = await importWMS();
     res.json(productos);
@@ -354,6 +356,8 @@ app.use("/Despachos", async (req, res) => {
     };
     const opts = { new: true };
     const objectUpdate = await Despachos.findOneAndUpdate(filter, update, opts);
+    res.json(req.body)
+
   } else {
     const productos = await importDespachos();
     res.json(productos);
