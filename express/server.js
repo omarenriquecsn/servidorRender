@@ -7,7 +7,6 @@
 // const mongoose = require("mongoose");
 // const cors = require("cors");
 
-
 // app.listen(3000, () => console.log('Local app listening on port 3000!'));
 
 // mongoose.connect(
@@ -104,7 +103,7 @@
 //     try {
 //       await Globalca.create(req.body);
 //       res.json(req.body);
-     
+
 //     } catch(error) {
 //       console.log(error);
 //     }
@@ -121,7 +120,7 @@
 //     const objectUpdate = await Globalca.findOneAndUpdate(filter, update, opts);
 //   } else {
 //     const productos = await importGlobalca();
-   
+
 //     res.json(productos);
 //   }
 // });
@@ -130,7 +129,7 @@
 //   if (req.body.producto) {
 //     WMS.create(req.body);
 //     res.json(req.body);
-   
+
 //   } else if (req.body.change) {
 //     const filter = { id: req.body.id };
 //     const update = {
@@ -143,7 +142,7 @@
 //     const objectUpdate = await WMS.findOneAndUpdate(filter, update, opts);
 //   } else {
 //     const productos = await importWMS();
-    
+
 //     res.json(productos);
 //   }
 // });
@@ -152,7 +151,7 @@
 //   if (req.body.producto) {
 //     Despachos.create(req.body);
 //     res.json(req.body);
-    
+
 //   }
 //     else if(req.body.change){
 //       const filter = { id: req.body.id };
@@ -167,7 +166,7 @@
 //    else {
 //     const productos = await importDespachos();
 //     res.json(productos);
-    
+
 //   }
 // });
 
@@ -186,7 +185,6 @@
 // module.exports = app;
 // module.exports.handler = serverless(app);
 
-
 "use strict";
 const express = require("express");
 const path = require("path");
@@ -196,7 +194,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-app.listen(process.env.PORT || 3000, () => console.log('Local app listening on port 3000!'));
+app.listen(process.env.PORT || 3000, () =>
+  console.log("Local app listening on port 3000!")
+);
 
 mongoose.connect(
   "mongodb+srv://omarenriquecs:P2wEdgjBpWWBxUtS@prueba.1w2j9.mongodb.net/Sumichen"
@@ -296,6 +296,10 @@ app.use("/Globalca", async (req, res) => {
     } catch (error) {
       console.log(error);
     }
+  } else if (req.body.contador) {
+    const conteo = await Globalca.countDocuments();
+    
+    res.json(conteo);
   } else if (req.body.change) {
     const filter = { id: req.body.id };
     const update = {
@@ -306,7 +310,7 @@ app.use("/Globalca", async (req, res) => {
     };
     const opts = { new: true };
     const objectUpdate = await Globalca.findOneAndUpdate(filter, update, opts);
-    res.json(req.body)
+    res.json(req.body);
   } else {
     const productos = await importGlobalca();
     res.json(productos);
@@ -321,6 +325,10 @@ app.use("/WMS", async (req, res) => {
     } catch (error) {
       console.log(error);
     }
+  } else if (req.body.contador) {
+    
+    const conteo = await WMS.countDocuments();
+    res.json(conteo);
   } else if (req.body.change) {
     const filter = { id: req.body.id };
     const update = {
@@ -331,8 +339,7 @@ app.use("/WMS", async (req, res) => {
     };
     const opts = { new: true };
     const objectUpdate = await WMS.findOneAndUpdate(filter, update, opts);
-    res.json(req.body)
-
+    res.json(req.body);
   } else {
     const productos = await importWMS();
     res.json(productos);
@@ -347,18 +354,20 @@ app.use("/Despachos", async (req, res) => {
     } catch (error) {
       console.log(error);
     }
+  } else if (req.body.contador) {
+    const conteo = await Despachos.countDocuments();
+    res.json(conteo);
   } else if (req.body.change) {
     const filter = { id: req.body.id };
     const update = {
       $set: {
-        status: req.body.status
+        status: req.body.status,
       },
     };
     const opts = { new: true };
     const objectUpdate = await Despachos.findOneAndUpdate(filter, update, opts);
-    res.json(req.body)
-
-  } else {
+    res.json(req.body);
+  }  else {
     const productos = await importDespachos();
     res.json(productos);
   }
@@ -373,6 +382,9 @@ app.use("/Clientes", async (req, res) => {
     } catch (error) {
       console.log(error);
     }
+  } else if (req.body.contador) {
+    const conteo = await Clientes.countDocuments();
+    res.json(conteo);
   } else {
     const productos = await importClientes();
     console.log("clientes");
