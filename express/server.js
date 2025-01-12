@@ -298,13 +298,22 @@ app.use("/Globalca", async (req, res) => {
     }
   } else if (req.body.contador) {
     const conteo = await Globalca.countDocuments();
-    
     res.json(conteo);
   } else if (req.body.change) {
     const filter = { id: req.body.id };
     const update = {
       $set: {
         cantidadDisponible: req.body.cantidadDisponible,
+        cantidadApartada: req.body.cantidadApartada,
+      },
+    };
+    const opts = { new: true };
+    const objectUpdate = await Globalca.findOneAndUpdate(filter, update, opts);
+    res.json(req.body);
+  } else if (req.body.actualizar) {
+    const filter = { id: req.body.id };
+    const update = {
+      $set: {
         cantidadApartada: req.body.cantidadApartada,
       },
     };
@@ -326,7 +335,6 @@ app.use("/WMS", async (req, res) => {
       console.log(error);
     }
   } else if (req.body.contador) {
-    
     const conteo = await WMS.countDocuments();
     res.json(conteo);
   } else if (req.body.change) {
@@ -334,6 +342,16 @@ app.use("/WMS", async (req, res) => {
     const update = {
       $set: {
         cantidadDisponible: req.body.cantidadDisponible,
+        cantidadApartada: req.body.cantidadApartada,
+      },
+    };
+    const opts = { new: true };
+    const objectUpdate = await WMS.findOneAndUpdate(filter, update, opts);
+    res.json(req.body);
+  } else if (req.body.actualizar) {
+    const filter = { id: req.body.id };
+    const update = {
+      $set: {
         cantidadApartada: req.body.cantidadApartada,
       },
     };
@@ -367,7 +385,7 @@ app.use("/Despachos", async (req, res) => {
     const opts = { new: true };
     const objectUpdate = await Despachos.findOneAndUpdate(filter, update, opts);
     res.json(req.body);
-  }  else {
+  } else {
     const productos = await importDespachos();
     res.json(productos);
   }
