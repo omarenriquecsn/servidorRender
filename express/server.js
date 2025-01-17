@@ -135,7 +135,7 @@ app.use("/Globalca", async (req, res) => {
     const objectUpdate = await Globalca.findOneAndUpdate(filter, update, opts);
     res.json(req.body);
   } else if (req.body.delete) {
-    const filter = {producto: req.body.delete};
+    const filter = {id: req.body.delete};
     const objectUpdate = await Despachos.findOneAndDelete(filter);
     res.json(objectUpdate);
   }else {
@@ -177,7 +177,7 @@ app.use("/WMS", async (req, res) => {
     const objectUpdate = await WMS.findOneAndUpdate(filter, update, opts);
     res.json(req.body);
   } else if (req.body.delete) {
-    const filter = {producto: req.body.delete};
+    const filter = {id: req.body.delete};
     const objectUpdate = await Despachos.findOneAndDelete(filter);
     res.json(objectUpdate);
   }else {
@@ -208,7 +208,7 @@ app.use("/Despachos", async (req, res) => {
     const objectUpdate = await Despachos.findOneAndUpdate(filter, update, opts);
     res.json(req.body);
   } else if (req.body.delete) {
-    const filter = {producto: req.body.delete};
+    const filter = {id: req.body.delete};
     const objectUpdate = await Despachos.findOneAndDelete(filter);
     res.json(objectUpdate);
   }else {
