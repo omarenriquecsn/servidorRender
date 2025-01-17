@@ -1,4 +1,3 @@
-
 "use strict";
 const express = require("express");
 const path = require("path");
@@ -135,10 +134,10 @@ app.use("/Globalca", async (req, res) => {
     const objectUpdate = await Globalca.findOneAndUpdate(filter, update, opts);
     res.json(req.body);
   } else if (req.body.delete) {
-    const filter = {id: req.body.delete};
-    const objectUpdate = await Despachos.findOneAndDelete(filter);
-    res.json(objectUpdate);
-  }else {
+    const filter = { id: req.body.delete };
+    const objectUpdate = await Globalca.findOneAndDelete(filter);
+    res.json(req.body);
+  } else {
     const productos = await importGlobalca();
     res.json(productos);
   }
@@ -177,10 +176,10 @@ app.use("/WMS", async (req, res) => {
     const objectUpdate = await WMS.findOneAndUpdate(filter, update, opts);
     res.json(req.body);
   } else if (req.body.delete) {
-    const filter = {id: req.body.delete};
-    const objectUpdate = await Despachos.findOneAndDelete(filter);
+    const filter = { id: req.body.delete };
+    const objectUpdate = await WMS.findOneAndDelete(filter);
     res.json(objectUpdate);
-  }else {
+  } else {
     const productos = await importWMS();
     res.json(productos);
   }
@@ -208,10 +207,10 @@ app.use("/Despachos", async (req, res) => {
     const objectUpdate = await Despachos.findOneAndUpdate(filter, update, opts);
     res.json(req.body);
   } else if (req.body.delete) {
-    const filter = {id: req.body.delete};
+    const filter = { id: req.body.delete };
     const objectUpdate = await Despachos.findOneAndDelete(filter);
     res.json(objectUpdate);
-  }else {
+  } else {
     const productos = await importDespachos();
     res.json(productos);
   }
